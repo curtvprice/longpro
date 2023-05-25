@@ -1,0 +1,1805 @@
+{
+  "type" : "CIMLayerDocument",
+  "version" : "3.1.0",
+  "build" : 41833,
+  "layers" : [
+    "CIMPATH=map/geology_of_north_america.json"
+  ],
+  "layerDefinitions" : [
+    {
+      "type" : "CIMFeatureLayer",
+      "name" : "Geology of North America",
+      "uRI" : "CIMPATH=map/geology_of_north_america.json",
+      "sourceURI" : "55c99b91a21b479e991cd486a5adeb4b",
+      "sourceModifiedTime" : {
+        "type" : "TimeInstant",
+        "start" : 978307200000
+      },
+      "metadataURI" : "CIMPATH=Metadata/3bf2d627e5132b4a8c5b7541b955455d.xml",
+      "useSourceMetadata" : false,
+      "layerElevation" : {
+        "type" : "CIMLayerElevationSurface",
+        "elevationSurfaceLayerURI" : "CIMPATH=map/ground2.json"
+      },
+      "expanded" : true,
+      "layerType" : "Operational",
+      "showLegends" : true,
+      "transparency" : 41,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "popupInfo" : {
+        "type" : "CIMPopupInfo",
+        "expressionInfos" : [
+          {
+            "type" : "CIMExpressionInfo",
+            "title" : "Concatenate Age",
+            "expression" : "IIf(IsEmpty($feature[\"MIN_MAX_RELATE\"]), \n    $feature[\"MAX_AGE\"], \n    Concatenate([$feature[\"MAX_AGE\"], $feature[\"MIN_MAX_RELATE\"], $feature[\"MIN_AGE\"] ], ' ')\n    )",
+            "name" : "expr0",
+            "returnType" : "String"
+          },
+          {
+            "type" : "CIMExpressionInfo",
+            "title" : "Lithology",
+            "expression" : "IIf(\n    IsEmpty($feature.LITHOLOGY), \n    '\\n', \n    Proper('\\n' + $feature.LITHOLOGY + '\\n', 'everyword')\n    )",
+            "name" : "expr1",
+            "returnType" : "String"
+          },
+          {
+            "type" : "CIMExpressionInfo",
+            "title" : "Age Uncertainty",
+            "expression" : "var newline\nnewline = IIF(\n    IsEmpty($feature[\"UNIT_UNCERTAINTY\"]), \n    \"\\n\\n\", \n    \"\\n\"\n    )\n    \nIIF(\n    IsEmpty($feature[\"AGE_UNCERTAINTY\"]),\n    \"\", \n    Concatenate('Age Uncertain', newline)\n    )",
+            "name" : "expr2",
+            "returnType" : "String"
+          },
+          {
+            "type" : "CIMExpressionInfo",
+            "title" : "Unit Uncertainty",
+            "expression" : "IIf(\n    IsEmpty($feature[\"UNIT_UNCERTAINTY\"] ), \n    \"\",\n    'Unit Composition or Origin Uncertain\\n\\n')\n",
+            "name" : "expr3",
+            "returnType" : "String"
+          },
+          {
+            "type" : "CIMExpressionInfo",
+            "title" : "Map Unit Note",
+            "expression" : "IIf(\n    IsEmpty($feature[\"MAP_UNIT_NOTE\"]), \n    \"\", \n    $feature[\"MAP_UNIT_NOTE\"] + '\\n\\n'\n    )\n",
+            "name" : "expr4",
+            "returnType" : "String"
+          }
+        ],
+        "mediaInfos" : [
+          {
+            "type" : "CIMTextMediaInfo",
+            "refreshRateUnit" : "esriTimeUnitsSeconds",
+            "rowSpan" : 1,
+            "columnSpan" : 1,
+            "text" : "<div style='text-align: center;'><font size='5'><b>{ROCKTYPE}</b></font></div><div style='text-align: center;'><i>{UNIT_ABBREV}<br />\u00A0</i>{expression/expr1}</div><div style='text-align: center;'>{expression/expr0}<br /></div><br /><div style='text-align: center;'><span style='font-style: italic;'>{expression/expr2}{expression/expr3}{expression/expr4}<a href='https://pubs.er.usgs.gov/publication/ds424' target='_blank' rel='nofollow ugc noopener noreferrer'>Database of the Geologic Map of North America: Adapted from the Map by J.C. Reed, Jr. and others (2005) </a></span></div>"
+          }
+        ],
+        "gridLayout" : {
+          "type" : "CIMPopupLayout",
+          "columnWidths" : [
+            100
+          ],
+          "borderWidth" : 0,
+          "borderColor" : {
+            "type" : "CIMRGBColor",
+            "values" : [
+              0,
+              0,
+              0,
+              100
+            ]
+          }
+        },
+        "fieldDescriptions" : [
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Age Uncertainty",
+            "fieldName" : "AGE_UNCERTAINTY"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Esri Symbology",
+            "fieldName" : "Esri_Symbology"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Lithology",
+            "fieldName" : "LITHOLOGY"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Notes",
+            "fieldName" : "MAP_UNIT_NOTE"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Maximum Age",
+            "fieldName" : "MAX_AGE"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Minimum Age",
+            "fieldName" : "MIN_AGE"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Age Relationship",
+            "fieldName" : "MIN_MAX_RELATE"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "OBJECTID",
+            "fieldName" : "OBJECTID",
+            "numberFormat" : {
+              "type" : "CIMNumericFormat",
+              "alignmentOption" : "esriAlignLeft",
+              "alignmentWidth" : 12,
+              "roundingOption" : "esriRoundNumberOfDecimals",
+              "roundingValue" : 0
+            }
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Rock Type",
+            "fieldName" : "ROCKTYPE"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Shape__Area",
+            "fieldName" : "Shape__Area",
+            "numberFormat" : {
+              "type" : "CIMNumericFormat",
+              "alignmentOption" : "esriAlignLeft",
+              "alignmentWidth" : 12,
+              "roundingOption" : "esriRoundNumberOfDecimals",
+              "roundingValue" : 2,
+              "useSeparator" : true
+            }
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Shape__Length",
+            "fieldName" : "Shape__Length",
+            "numberFormat" : {
+              "type" : "CIMNumericFormat",
+              "alignmentOption" : "esriAlignLeft",
+              "alignmentWidth" : 12,
+              "roundingOption" : "esriRoundNumberOfDecimals",
+              "roundingValue" : 2,
+              "useSeparator" : true
+            }
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Unit Code",
+            "fieldName" : "UNIT_ABBREV"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "alias" : "Unit Uncertainty",
+            "fieldName" : "UNIT_UNCERTAINTY"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "fieldName" : "expression/expr0"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "fieldName" : "expression/expr1"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "fieldName" : "expression/expr2"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "fieldName" : "expression/expr3"
+          },
+          {
+            "type" : "CIMPopupFieldDescription",
+            "fieldName" : "expression/expr4"
+          }
+        ]
+      },
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
+      "allowDrapingOnIntegratedMesh" : true,
+      "featureElevationExpression" : "0",
+      "featureTable" : {
+        "type" : "CIMFeatureTable",
+        "definitionExpression" : "(AGE_UNCERTAINTY IS NULL) AND (UNIT_UNCERTAINTY IS NULL)",
+        "displayField" : "UNIT_ABBREV",
+        "editable" : false,
+        "dataConnection" : {
+          "type" : "CIMStandardDataConnection",
+          "workspaceConnectionString" : "URL=https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Geology_of_North_America/FeatureServer",
+          "workspaceFactory" : "FeatureService",
+          "dataset" : "0",
+          "datasetType" : "esriDTFeatureClass"
+        },
+        "studyAreaSpatialRel" : "esriSpatialRelUndefined",
+        "searchOrder" : "esriSearchOrderSpatial"
+      },
+      "featureTemplates" : [
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Holocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Holocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Pleistocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Pleistocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Quaternary",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Quaternary"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Pliocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Pliocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Miocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Miocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Neogene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Neogene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Oligocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Oligocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Eocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Eocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Paleocene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Paleocene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Paleogene",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Paleogene"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Tertiary",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Tertiary"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Cenozoic",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Cenozoic"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Cretaceous",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Cretaceous"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Jurassic",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Jurassic"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Triassic",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Triassic"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Mesozoic",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Mesozoic"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Permian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Permian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Pennsylvanian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Pennsylvanian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Mississippian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Mississippian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Devonian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Devonian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Silurian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Silurian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Ordovician",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Ordovician"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Cambrian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Cambrian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Paleozoic",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Paleozoic"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Proterozoic",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Proterozoic"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Archean",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Archean"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Precambrian",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Precambrian"
+            ]
+          }
+        },
+        {
+          "type" : "CIMRowTemplate",
+          "name" : "Age unknown",
+          "defaultToolGUID" : "8f79967b-66a0-4a1c-b884-f44bc7e26921",
+          "defaultValues" : {
+            "type" : "PropertySet",
+            "propertySetItems" : [
+              "esri_symbology",
+              "Age unknown"
+            ]
+          }
+        }
+      ],
+      "htmlPopupEnabled" : true,
+      "selectable" : false,
+      "featureCacheType" : "Session",
+      "displayFiltersType" : "ByScale",
+      "featureBlendingMode" : "Alpha",
+      "labelClasses" : [
+        {
+          "type" : "CIMLabelClass",
+          "expressionTitle" : "Custom",
+          "expression" : "$feature.UNIT_ABBREV",
+          "expressionEngine" : "Arcade",
+          "featuresToLabel" : "AllVisibleFeatures",
+          "maplexLabelPlacementProperties" : {
+            "type" : "CIMMaplexLabelPlacementProperties",
+            "featureType" : "Polygon",
+            "avoidPolygonHoles" : true,
+            "canOverrunFeature" : true,
+            "canPlaceLabelOutsidePolygon" : true,
+            "canRemoveOverlappingLabel" : true,
+            "canStackLabel" : true,
+            "centerLabelAnchorType" : "Symbol",
+            "connectionType" : "Unambiguous",
+            "constrainOffset" : "NoConstraint",
+            "contourAlignmentType" : "Page",
+            "contourLadderType" : "Straight",
+            "contourMaximumAngle" : 90,
+            "enableConnection" : true,
+            "featureWeight" : 0,
+            "fontHeightReductionLimit" : 4,
+            "fontHeightReductionStep" : 0.5,
+            "fontWidthReductionLimit" : 90,
+            "fontWidthReductionStep" : 5,
+            "graticuleAlignmentType" : "Straight",
+            "keyNumberGroupName" : "Default",
+            "labelBuffer" : 15,
+            "labelLargestPolygon" : true,
+            "labelPriority" : -1,
+            "labelStackingProperties" : {
+              "type" : "CIMMaplexLabelStackingProperties",
+              "stackAlignment" : "ChooseBest",
+              "maximumNumberOfLines" : 3,
+              "minimumNumberOfCharsPerLine" : 3,
+              "maximumNumberOfCharsPerLine" : 24,
+              "separators" : [
+                {
+                  "type" : "CIMMaplexStackingSeparator",
+                  "separator" : " ",
+                  "splitAfter" : true
+                },
+                {
+                  "type" : "CIMMaplexStackingSeparator",
+                  "separator" : ",",
+                  "visible" : true,
+                  "splitAfter" : true
+                }
+              ],
+              "trimStackingSeparators" : true
+            },
+            "lineFeatureType" : "General",
+            "linePlacementMethod" : "OffsetCurvedFromLine",
+            "maximumLabelOverrun" : 80,
+            "maximumLabelOverrunUnit" : "Point",
+            "minimumFeatureSizeUnit" : "Map",
+            "multiPartOption" : "OneLabelPerPart",
+            "offsetAlongLineProperties" : {
+              "type" : "CIMMaplexOffsetAlongLineProperties",
+              "placementMethod" : "BestPositionAlongLine",
+              "labelAnchorPoint" : "CenterOfLabel",
+              "distanceUnit" : "Percentage",
+              "useLineDirection" : true
+            },
+            "pointExternalZonePriorities" : {
+              "type" : "CIMMaplexExternalZonePriorities",
+              "aboveLeft" : 4,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerRight" : 3,
+              "belowRight" : 5,
+              "belowCenter" : 7,
+              "belowLeft" : 8,
+              "centerLeft" : 6
+            },
+            "pointPlacementMethod" : "AroundPoint",
+            "polygonAnchorPointType" : "GeometricCenter",
+            "polygonBoundaryWeight" : 0,
+            "polygonExternalZones" : {
+              "type" : "CIMMaplexExternalZonePriorities",
+              "aboveLeft" : 4,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerRight" : 3,
+              "belowRight" : 5,
+              "belowCenter" : 7,
+              "belowLeft" : 8,
+              "centerLeft" : 6
+            },
+            "polygonFeatureType" : "General",
+            "polygonInternalZones" : {
+              "type" : "CIMMaplexInternalZonePriorities",
+              "center" : 1
+            },
+            "polygonPlacementMethod" : "HorizontalInPolygon",
+            "primaryOffset" : 1,
+            "primaryOffsetUnit" : "Point",
+            "removeAmbiguousLabels" : "All",
+            "removeExtraWhiteSpace" : true,
+            "repetitionIntervalUnit" : "Point",
+            "rotationProperties" : {
+              "type" : "CIMMaplexRotationProperties",
+              "rotationType" : "Arithmetic",
+              "alignmentType" : "Straight"
+            },
+            "secondaryOffset" : 100,
+            "secondaryOffsetUnit" : "Percentage",
+            "strategyPriorities" : {
+              "type" : "CIMMaplexStrategyPriorities",
+              "stacking" : 1,
+              "overrun" : 2,
+              "fontCompression" : 3,
+              "fontReduction" : 4,
+              "abbreviation" : 5
+            },
+            "thinningDistanceUnit" : "Point",
+            "truncationMarkerCharacter" : ".",
+            "truncationMinimumLength" : 1,
+            "truncationPreferredCharacters" : "aeiou",
+            "truncationExcludedCharacters" : "0123456789",
+            "polygonAnchorPointPerimeterInsetUnit" : "Point"
+          },
+          "name" : "Class 1",
+          "priority" : -1,
+          "standardLabelPlacementProperties" : {
+            "type" : "CIMStandardLabelPlacementProperties",
+            "featureType" : "Line",
+            "featureWeight" : "None",
+            "labelWeight" : "High",
+            "numLabelsOption" : "OneLabelPerName",
+            "lineLabelPosition" : {
+              "type" : "CIMStandardLineLabelPosition",
+              "above" : true,
+              "inLine" : true,
+              "parallel" : true
+            },
+            "lineLabelPriorities" : {
+              "type" : "CIMStandardLineLabelPriorities",
+              "aboveStart" : 3,
+              "aboveAlong" : 3,
+              "aboveEnd" : 3,
+              "centerStart" : 3,
+              "centerAlong" : 3,
+              "centerEnd" : 3,
+              "belowStart" : 3,
+              "belowAlong" : 3,
+              "belowEnd" : 3
+            },
+            "pointPlacementMethod" : "AroundPoint",
+            "pointPlacementPriorities" : {
+              "type" : "CIMStandardPointPlacementPriorities",
+              "aboveLeft" : 2,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerLeft" : 3,
+              "centerRight" : 2,
+              "belowLeft" : 3,
+              "belowCenter" : 3,
+              "belowRight" : 2
+            },
+            "rotationType" : "Arithmetic",
+            "polygonPlacementMethod" : "AlwaysHorizontal"
+          },
+          "textSymbol" : {
+            "type" : "CIMSymbolReference",
+            "symbol" : {
+              "type" : "CIMTextSymbol",
+              "blockProgression" : "TTB",
+              "depth3D" : 1,
+              "extrapolateBaselines" : true,
+              "fontEffects" : "Normal",
+              "fontEncoding" : "Unicode",
+              "fontFamilyName" : "Tahoma",
+              "fontStyleName" : "Regular",
+              "fontType" : "Unspecified",
+              "haloSize" : 1,
+              "height" : 10,
+              "hinting" : "Default",
+              "horizontalAlignment" : "Left",
+              "kerning" : true,
+              "letterWidth" : 100,
+              "ligatures" : true,
+              "lineGapType" : "ExtraLeading",
+              "symbol" : {
+                "type" : "CIMPolygonSymbol",
+                "symbolLayers" : [
+                  {
+                    "type" : "CIMSolidFill",
+                    "enable" : true,
+                    "color" : {
+                      "type" : "CIMRGBColor",
+                      "values" : [
+                        0,
+                        0,
+                        0,
+                        100
+                      ]
+                    }
+                  }
+                ],
+                "angleAlignment" : "Map"
+              },
+              "textCase" : "Normal",
+              "textDirection" : "LTR",
+              "verticalAlignment" : "Bottom",
+              "verticalGlyphOrientation" : "Right",
+              "wordSpacing" : 100,
+              "billboardMode3D" : "FaceNearPlane"
+            }
+          },
+          "useCodedValue" : true,
+          "visibility" : true,
+          "iD" : -1
+        }
+      ],
+      "renderer" : {
+        "type" : "CIMUniqueValueRenderer",
+        "sampleSize" : 10000,
+        "colorRamp" : {
+          "type" : "CIMMultipartColorRamp",
+          "colorRamps" : [
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  161,
+                  181,
+                  212,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  161,
+                  181,
+                  212,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  176,
+                  201,
+                  145,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  176,
+                  201,
+                  145,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  214,
+                  152,
+                  161,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  214,
+                  152,
+                  161,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  174,
+                  143,
+                  201,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  174,
+                  143,
+                  201,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  194,
+                  172,
+                  145,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  194,
+                  172,
+                  145,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  149,
+                  204,
+                  187,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  149,
+                  204,
+                  187,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  209,
+                  178,
+                  203,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  209,
+                  178,
+                  203,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  201,
+                  143,
+                  186,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  201,
+                  143,
+                  186,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  143,
+                  150,
+                  201,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  143,
+                  150,
+                  201,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  202,
+                  207,
+                  174,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  202,
+                  207,
+                  174,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  181,
+                  169,
+                  209,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  181,
+                  169,
+                  209,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  142,
+                  191,
+                  146,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  142,
+                  191,
+                  146,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  157,
+                  184,
+                  191,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  157,
+                  184,
+                  191,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  207,
+                  166,
+                  159,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  207,
+                  166,
+                  159,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  194,
+                  155,
+                  167,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  194,
+                  155,
+                  167,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  214,
+                  198,
+                  152,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  214,
+                  198,
+                  152,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  163,
+                  191,
+                  164,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  163,
+                  191,
+                  164,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  203,
+                  163,
+                  212,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  203,
+                  163,
+                  212,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  191,
+                  214,
+                  171,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  191,
+                  214,
+                  171,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  214,
+                  198,
+                  180,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  214,
+                  198,
+                  180,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  191,
+                  153,
+                  184,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  191,
+                  153,
+                  184,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  147,
+                  203,
+                  204,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  147,
+                  203,
+                  204,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  204,
+                  212,
+                  152,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  204,
+                  212,
+                  152,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  142,
+                  156,
+                  191,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  142,
+                  156,
+                  191,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  182,
+                  210,
+                  214,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  182,
+                  210,
+                  214,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  196,
+                  145,
+                  139,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  196,
+                  145,
+                  139,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  168,
+                  214,
+                  152,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  168,
+                  214,
+                  152,
+                  100
+                ]
+              }
+            },
+            {
+              "type" : "CIMLinearContinuousColorRamp",
+              "fromColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  191,
+                  194,
+                  149,
+                  100
+                ]
+              },
+              "toColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  191,
+                  194,
+                  149,
+                  100
+                ]
+              }
+            }
+          ]
+        },
+        "defaultSymbolPatch" : "Default",
+        "fields" : [
+          "Esri_Symbology"
+        ],
+        "groups" : [
+          {
+            "type" : "CIMUniqueValueGroup",
+            "classes" : [
+              {
+                "type" : "CIMUniqueValueClass",
+                "editable" : true,
+                "label" : "Cenezoic",
+                "patch" : "Default",
+                "symbol" : {
+                  "type" : "CIMSymbolReference",
+                  "symbol" : {
+                    "type" : "CIMPolygonSymbol",
+                    "symbolLayers" : [
+                      {
+                        "type" : "CIMSolidStroke",
+                        "enable" : false,
+                        "colorLocked" : true,
+                        "capStyle" : "Butt",
+                        "joinStyle" : "Round",
+                        "lineStyle3D" : "Strip",
+                        "miterLimit" : 10,
+                        "width" : 0,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            110,
+                            110,
+                            110,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "type" : "CIMSolidFill",
+                        "enable" : true,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            190,
+                            232,
+                            255,
+                            100
+                          ]
+                        }
+                      }
+                    ],
+                    "angleAlignment" : "Map"
+                  }
+                },
+                "values" : [
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Holocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Cenozoic"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Pleistocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Quaternary"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Pliocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Miocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Neogene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Oligocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Eocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Paleocene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Paleogene"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Tertiary"
+                    ]
+                  }
+                ],
+                "visible" : true
+              },
+              {
+                "type" : "CIMUniqueValueClass",
+                "editable" : true,
+                "label" : "Mesozoic",
+                "patch" : "Default",
+                "symbol" : {
+                  "type" : "CIMSymbolReference",
+                  "symbol" : {
+                    "type" : "CIMPolygonSymbol",
+                    "symbolLayers" : [
+                      {
+                        "type" : "CIMSolidStroke",
+                        "enable" : false,
+                        "colorLocked" : true,
+                        "capStyle" : "Butt",
+                        "joinStyle" : "Round",
+                        "lineStyle3D" : "Strip",
+                        "miterLimit" : 10,
+                        "width" : 0,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            110,
+                            110,
+                            110,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "type" : "CIMSolidFill",
+                        "enable" : true,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            211,
+                            255,
+                            190,
+                            100
+                          ]
+                        }
+                      }
+                    ],
+                    "angleAlignment" : "Map"
+                  }
+                },
+                "values" : [
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Cretaceous"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Jurassic"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Triassic"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Mesozoic"
+                    ]
+                  }
+                ],
+                "visible" : true
+              },
+              {
+                "type" : "CIMUniqueValueClass",
+                "editable" : true,
+                "label" : "Paleozoic",
+                "patch" : "Default",
+                "symbol" : {
+                  "type" : "CIMSymbolReference",
+                  "symbol" : {
+                    "type" : "CIMPolygonSymbol",
+                    "symbolLayers" : [
+                      {
+                        "type" : "CIMSolidStroke",
+                        "enable" : false,
+                        "colorLocked" : true,
+                        "capStyle" : "Butt",
+                        "joinStyle" : "Round",
+                        "lineStyle3D" : "Strip",
+                        "miterLimit" : 10,
+                        "width" : 0,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            110,
+                            110,
+                            110,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "type" : "CIMSolidFill",
+                        "enable" : true,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            255,
+                            235,
+                            190,
+                            100
+                          ]
+                        }
+                      }
+                    ],
+                    "angleAlignment" : "Map"
+                  }
+                },
+                "values" : [
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Permian"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Pennsylvanian"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Mississippian"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Devonian"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Silurian"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Ordovician"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Cambrian"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Paleozoic"
+                    ]
+                  }
+                ],
+                "visible" : true
+              },
+              {
+                "type" : "CIMUniqueValueClass",
+                "editable" : true,
+                "label" : "Precambrian",
+                "patch" : "Default",
+                "symbol" : {
+                  "type" : "CIMSymbolReference",
+                  "symbol" : {
+                    "type" : "CIMPolygonSymbol",
+                    "symbolLayers" : [
+                      {
+                        "type" : "CIMSolidStroke",
+                        "enable" : false,
+                        "colorLocked" : true,
+                        "capStyle" : "Butt",
+                        "joinStyle" : "Round",
+                        "lineStyle3D" : "Strip",
+                        "miterLimit" : 10,
+                        "width" : 0,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            110,
+                            110,
+                            110,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "type" : "CIMSolidFill",
+                        "enable" : true,
+                        "color" : {
+                          "type" : "CIMRGBColor",
+                          "values" : [
+                            232,
+                            190,
+                            255,
+                            100
+                          ]
+                        }
+                      }
+                    ],
+                    "angleAlignment" : "Map"
+                  }
+                },
+                "values" : [
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Proterozoic"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Archean"
+                    ]
+                  },
+                  {
+                    "type" : "CIMUniqueValue",
+                    "fieldValues" : [
+                      "Precambrian"
+                    ]
+                  }
+                ],
+                "visible" : true
+              }
+            ]
+          }
+        ],
+        "polygonSymbolColorTarget" : "Fill"
+      },
+      "scaleSymbols" : true,
+      "snappable" : true
+    }
+  ],
+  "binaryReferences" : [
+    {
+      "type" : "CIMBinaryReference",
+      "uRI" : "CIMPATH=Metadata/3bf2d627e5132b4a8c5b7541b955455d.xml",
+      "data" : "<?xml version=\"1.0\"?>\r\n<metadata xml:lang=\"en\"><Esri><CreaDate>20230414</CreaDate><CreaTime>21133700</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce></Esri><dataIdInfo><idCitation><resTitle>Database of the Geologic Map of North America</resTitle></idCitation><searchKeys></searchKeys><idPurp></idPurp><idAbs>&lt;DIV STYLE=\"text-align:Left;font-size:12pt\"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Garrity, C.P., and Soller, D.R., 2009, Database of the Geologic Map of North America; adapted from the map by J.C. Reed, Jr. and others (2005): U.S. Geological Survey Data Series 424&lt;/SPAN&gt;&lt;/P&gt;&lt;P&gt;&lt;SPAN /&gt;&lt;/P&gt;&lt;P&gt;&lt;SPAN&gt;https://arcgis.com/home/item.html?id=55c99b91a21b479e991cd486a5adeb4b&lt;/SPAN&gt;&lt;/P&gt;&lt;P&gt;&lt;SPAN /&gt;&lt;/P&gt;&lt;P&gt;&lt;SPAN /&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs><idCredit></idCredit><resConst><Consts><useLimit></useLimit></Consts></resConst></dataIdInfo><Binary><Thumbnail><Data EsriPropertyType=\"PictureX\">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</Data></Thumbnail></Binary></metadata>\r\n"
+    }
+  ],
+  "rGBColorProfile" : "sRGB IEC61966-2.1",
+  "cMYKColorProfile" : "U.S. Web Coated (SWOP) v2",
+  "elevationSurfaceLayerDefinitions" : [
+    {
+      "type" : "CIMElevationSurfaceLayer",
+      "name" : "Ground",
+      "uRI" : "CIMPATH=map/ground2.json",
+      "useSourceMetadata" : true,
+      "description" : "Ground",
+      "expanded" : true,
+      "layerType" : "Operational",
+      "showLegends" : false,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
+      "allowDrapingOnIntegratedMesh" : true,
+      "elevationMode" : "BaseGlobeSurface",
+      "verticalExaggeration" : 1,
+      "color" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          255,
+          255,
+          255,
+          100
+        ]
+      },
+      "surfaceTINShadingMode" : "Smooth"
+    }
+  ]
+}
