@@ -1,0 +1,150 @@
+{
+  "type" : "CIMLayerDocument",
+  "version" : "3.1.0",
+  "build" : 41833,
+  "layers" : [
+    "CIMPATH=basin_map/ion__sgmc__geodatabase_of_the_conterminous_united_states.json"
+  ],
+  "layerDefinitions" : [
+    {
+      "type" : "CIMMapImageLayer",
+      "name" : "The State Geologic Map Compilation (SGMC) Geodatabase of the Conterminous United States",
+      "uRI" : "CIMPATH=basin_map/ion__sgmc__geodatabase_of_the_conterminous_united_states.json",
+      "sourceURI" : "3890cfedb3204aa8828765a2ccfaeb38",
+      "sourceModifiedTime" : {
+        "type" : "TimeInstant"
+      },
+      "useSourceMetadata" : true,
+      "attribution" : "Horton, J.D., 2017, The State Geologic Map Compilation (SGMC) geodatabase of the conterminous United States (ver. 1.1, August 2017): U.S. Geological Survey data release, https://doi.org/10.5066/F7WH2N65",
+      "description" : "Catalog/5888bf4fe4b05ccb964bab9d",
+      "layerElevation" : {
+        "type" : "CIMLayerElevationSurface",
+        "elevationSurfaceLayerURI" : "CIMPATH=map/ground.json"
+      },
+      "expanded" : true,
+      "layerType" : "Operational",
+      "showLegends" : true,
+      "transparency" : 60,
+      "visibility" : true,
+      "displayCacheType" : "None",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
+      "allowDrapingOnIntegratedMesh" : true,
+      "serviceConnection" : {
+        "type" : "CIMAGSServiceConnection",
+        "objectName" : "Catalog/5888bf4fe4b05ccb964bab9d",
+        "objectType" : "MapServer",
+        "url" : "https://www.sciencebase.gov/arcgis/rest/services/Catalog/5888bf4fe4b05ccb964bab9d/MapServer",
+        "serverConnection" : {
+          "type" : "CIMInternetServerConnection",
+          "anonymous" : true,
+          "hideUserProperty" : true,
+          "url" : "https://www.sciencebase.gov/arcgis/services"
+        }
+      },
+      "subLayers" : [
+        {
+          "type" : "CIMServiceSubLayer",
+          "minScale" : 1000000,
+          "name" : "SGMC_Points",
+          "showLegends" : true,
+          "subLayerID" : "0",
+          "visibility" : true,
+          "serviceLayerID" : -1,
+          "timeOffsetUnits" : "esriTimeUnitsUnknown",
+          "showPopups" : true
+        },
+        {
+          "type" : "CIMServiceSubLayer",
+          "minScale" : 1000000,
+          "name" : "SGMC_Structure",
+          "showLegends" : true,
+          "subLayerID" : "1",
+          "visibility" : true,
+          "serviceLayerID" : -1,
+          "timeOffsetUnits" : "esriTimeUnitsUnknown",
+          "showPopups" : true
+        },
+        {
+          "type" : "CIMServiceSubLayer",
+          "minScale" : 1000000,
+          "name" : "SGMC_Contacts (mapservice)",
+          "showLegends" : true,
+          "subLayerID" : "2",
+          "visibility" : true,
+          "serviceLayerID" : -1,
+          "timeOffsetUnits" : "esriTimeUnitsUnknown",
+          "showPopups" : true
+        },
+        {
+          "type" : "CIMServiceSubLayer",
+          "name" : "SGMC_Geology",
+          "showLegends" : true,
+          "subLayerID" : "3",
+          "visibility" : true,
+          "serviceLayerID" : -1,
+          "timeOffsetUnits" : "esriTimeUnitsUnknown",
+          "showPopups" : true
+        }
+      ],
+      "transparentColor" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          254,
+          254,
+          254,
+          100
+        ]
+      },
+      "backgroundColor" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          254,
+          254,
+          254,
+          100
+        ]
+      },
+      "imageFormat" : "esriImagePNG32"
+    }
+  ],
+  "rGBColorProfile" : "sRGB IEC61966-2-1 noBPC",
+  "cMYKColorProfile" : "U.S. Web Coated (SWOP) v2",
+  "elevationSurfaceLayerDefinitions" : [
+    {
+      "type" : "CIMElevationSurfaceLayer",
+      "name" : "Ground",
+      "uRI" : "CIMPATH=map/ground.json",
+      "useSourceMetadata" : true,
+      "description" : "Ground",
+      "expanded" : true,
+      "layerType" : "Operational",
+      "showLegends" : false,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
+      "allowDrapingOnIntegratedMesh" : true,
+      "elevationMode" : "BaseGlobeSurface",
+      "verticalExaggeration" : 1,
+      "color" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          255,
+          255,
+          255,
+          100
+        ]
+      },
+      "surfaceTINShadingMode" : "Smooth"
+    }
+  ]
+}
