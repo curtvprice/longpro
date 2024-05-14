@@ -10,9 +10,10 @@ import os
 import arcpy
 import numpy as np
 from scipy.stats import linregress
-def SegmentProfile(mainstem_point, use_existing="false"):
+def SegmentProfile(mainstem_point, use_existing="false", verbose="false"):
     """Script code goes below"""
     use_existing = use_existing == "true"
+    verbose =  verbose == "true"
     
     # copy data from ArcGIS to python numpy arrays
     arr = arcpy.da.TableToNumPyArray(mainstem_point, ("SEG", "ACENT", "SLPPCT"))
@@ -23,10 +24,11 @@ def SegmentProfile(mainstem_point, use_existing="false"):
     # run regression on entire area-slope pairs
     
     r = linregress(logar,logsl)
-    arcpy.AddMessage("log10: slope: {:.3f} intercept {:.3f} pvalue {:.3f}".format(
-        r.slope, r.intercept, r.pvalue))
-    arcpy.AddMessage("raw:   slope: {:.3f} intercept {:.3f} pvalue {:.3f}".format(
-        10**r.slope,10**r.intercept, r.pvalue))
+    if verbose:
+        arcpy.AddMessage("log10: slope: {:.3f} intercept {:.3f} pvalue {:.3f}".format(
+            r.slope, r.intercept, r.pvalue))
+        arcpy.AddMessage("raw:   slope: {:.3f} intercept {:.3f} pvalue {:.3f}".format(
+            10**r.slope,10**r.intercept, r.pvalue))
         
     if not use_existing:
     
@@ -41,18 +43,21 @@ def SegmentProfile(mainstem_point, use_existing="false"):
             r = linregress(logar[:k], logsl[:k])
             sign = int(r.slope >= 0) # 1 for non-negative, 0 for negative
             tags.append(sign)
-            arcpy.AddMessage("{} - {}: slope: {:.3f} intercept {:.3f} pvalue {:.3f} N:{} {}".format(
-                k, arr1["SEG"][0], r.slope, r.intercept, r.pvalue,len(logar[:k]), sign))
+            if verbose:
+                arcpy.AddMessage("{} - {}: slope: {:.3f} intercept {:.3f} pvalue {:.3f} N:{} {}".format(
+                    k, arr1["SEG"][0], r.slope, r.intercept, r.pvalue,len(logar[:k]), sign))
         # run regression on every complete window
         for k in range(len(arr1)-(gg-1)):
             r = linregress(logar[k:k+gg], logsl[k:k+gg])
             sign = int(r.slope >= 0) # 1 for non-negative, 0 for negative
             tags.append(sign)
-            arcpy.AddMessage("{} - {}: slope: {:.3f} intercept {:.3f} pvalue {:.3f} N:{} {}".format(
-                k, arr1["SEG"][k], r.slope, r.intercept, r.pvalue,len(logar[k:k+gg]), sign))
+            if verbose:
+                arcpy.AddMessage("{} - {}: slope: {:.3f} intercept {:.3f} pvalue {:.3f} N:{} {}".format(
+                    k, arr1["SEG"][k], r.slope, r.intercept, r.pvalue,len(logar[k:k+gg]), sign))
         # assign last incomplete point groups to slope of last complete group
         tags += [sign] * ggh
-        arcpy.AddMessage("tags: {}".format(tags))
+        if verbose:
+            arcpy.AddMessage("tags: {}".format(tags))
         
         # at each change in tag (zero to 1 or back), set a new slope segment
         
@@ -78,7 +83,8 @@ def SegmentProfile(mainstem_point, use_existing="false"):
     seglist = list(set(ssegs1)) # unique list of slope segments
     #arcpy.AddMessage("SEG IN {}".format(tuple(oids))) # select expression for use in ArcGIS checking
     arcpy.AddMessage("{} slope segments found".format(len(seglist)))
-    arcpy.AddMessage(seglist)
+    if verbose:
+        arcpy.AddMessage(seglist)
     
     # run regressions on each slope segment, these are our ks results
     

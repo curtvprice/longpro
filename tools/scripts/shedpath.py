@@ -5,8 +5,10 @@ from arcpy import env
 from arcpy.sa import *
 
 def gpmsg(msg=None):
-    if msg: arcpy.AddMessage(msg)
-    arcpy.AddMessage(arcpy.GetMessages(0))
+    if msg: 
+        arcpy.AddMessage(msg)
+    else:
+        arcpy.AddMessage(arcpy.GetMessages(0))
     
 def shedpath(shed_folder, vslice="12.2", *derived):
     """Build watershed flowlength and mainstem"""
@@ -19,9 +21,10 @@ def shedpath(shed_folder, vslice="12.2", *derived):
         ogdb = os.path.join(ofolder, "watershed.gdb")
 
         # calculate flow length
+        gpmsg("Flow length ...")
         flen = FlowLength("fdr.tif", "DOWNSTREAM")
         flen.save("len.tif")
-        gpmsg("Flow length")
+        gpmsg("Flow length complete.")
 
         cellSize = flen.meanCellHeight
         
